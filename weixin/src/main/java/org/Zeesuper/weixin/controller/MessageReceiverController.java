@@ -65,7 +65,7 @@ public class MessageReceiverController {
 //		} else if (xml.contains("<MsgType><![CDATA[image]]></MsgType>")) {
 //		} else if (xml.contains("<MsgType><![CDATA[voice]]></MsgType>")) {
 //		} else if (xml.contains("<MsgType><![CDATA[video]]></MsgType>")) {
-//		} else if (xml.contains("<MsgType><![CDATA[location]]></MsgType>")) {
+//		} else if (xml.contains( c"<MsgType><![CDATA[location]]></MsgType>")) {
 //		}
 
 		// 截取消息类型
