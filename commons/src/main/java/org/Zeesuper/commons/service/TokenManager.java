@@ -1,4 +1,4 @@
-package org.Zeesuper.weixin.service;
+package org.Zeesuper.commons.service;
 
 public interface TokenManager {
 
