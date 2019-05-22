@@ -4,7 +4,7 @@ import org.Zeesuper.commons.domain.User;
 import org.Zeesuper.commons.domain.event.EventInMessage;
 import org.Zeesuper.commons.processors.EventMessageProcessor;
 import org.Zeesuper.commons.repository.UserRepository;
-import org.Zeesuper.weixin.service.WeixinProxy;
+import org.Zeesuper.commons.service.WeixinProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
