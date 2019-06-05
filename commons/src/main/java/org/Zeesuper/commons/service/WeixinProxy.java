@@ -63,35 +63,33 @@ public class WeixinProxy {
 		}
 		return null;
 	}
+
 	public void sendText(String account, String openId, String content) {
 		TextOutMessage msg = new TextOutMessage(openId, content);
-
 		try {
 			// 转换消息对象为JSON
 			String json = this.objectMapper.writeValueAsString(msg);
 			// 发送消息
-			String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" ;
-		    post(url,json);
+			String url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=";
+			post(url, json);
 		} catch (JsonProcessingException e) {
-			LOG.error("通过客服接口发送信息出现问题："+e.getLocalizedMessage(),e);
+			LOG.error("通过客服接口发送信息出现问题：" + e.getLocalizedMessage(), e);
 		}
 	}
+
 	public void saveMenu(String json) {
-		// TODO Auto-generated method stub
 		String url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=";
-		this.post(url,json);
+		this.post(url, json);
 	}
 
-	
 	private void post(String url, String json) {
-	
+		LOG.trace("POST方式发送给微信公众号的信息: \n{}", json);
 		// 获取令牌
-		String token = this.tokenManager.getToken(null );
+		String token = this.tokenManager.getToken(null);
 		try {
 			// 转换消息对象为JSON
-			
 			// 发送消息
-			url = url+ token;
+			url = url + token;
 			HttpRequest request = HttpRequest.newBuilder(URI.create(url))//
 					.POST(BodyPublishers.ofString(json, Charset.forName("UTF-8")))// POST方式发送
 					.build();
@@ -101,12 +99,10 @@ public class WeixinProxy {
 					= client.sendAsync(request, BodyHandlers.ofString(Charset.forName("UTF-8")));
 			future.thenAccept(response -> {
 				String body = response.body();
-				LOG.trace("POST数据返回到微信公众号返回的内容 : \n{}", body);
+				LOG.trace("POST数据到微信公众号返回的内容 : \n{}", body);
 			});
 		} catch (Exception e) {
-			LOG.error("POST数据返回到微信公众号出现问题："+e.getLocalizedMessage(),e);
+			LOG.error("POST数据到微信公众号出现问题：" + e.getLocalizedMessage(), e);
 		}
 	}
-
-	
 }
